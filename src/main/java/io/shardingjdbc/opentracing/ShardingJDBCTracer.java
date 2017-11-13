@@ -34,16 +34,14 @@ import lombok.NoArgsConstructor;
  * @author gaohongtao
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class TracerContainer {
+public final class ShardingJDBCTracer {
     
     /**
-     * Get the tracer from container.
-     * 
-     * @return tracer
+     * Initialize tracer.
      */
-    public static Tracer init() {
+    public static void init() {
         if (GlobalTracer.isRegistered()) {
-            return GlobalTracer.get();
+            return;
         }
         String tracerClassName = new ConfigLoader().getTracerClassName();
         try {
@@ -52,6 +50,18 @@ public final class TracerContainer {
             throw new ShardingJdbcException("Parse tracer class name", ex);
         }
         EventBusInstance.getInstance().register(new ExecuteEventListener());
+    } 
+    
+    /**
+     * Get the tracer from container.
+     * 
+     * @return tracer
+     */
+    public static Tracer get() {
+        if (GlobalTracer.isRegistered()) {
+            return GlobalTracer.get();
+        }
+        init();
         return GlobalTracer.get();
     }
 }

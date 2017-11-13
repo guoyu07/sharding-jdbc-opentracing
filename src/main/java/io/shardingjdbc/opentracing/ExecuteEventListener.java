@@ -54,7 +54,7 @@ public final class ExecuteEventListener {
     @Subscribe
     @AllowConcurrentEvents
     public void listenOverall(final OverallExecutionEvent event) {
-        Tracer tracer = TracerContainer.init();
+        Tracer tracer = ShardingJDBCTracer.get();
         ActiveSpan activeSpan;
         switch (event.getEventExecutionType()) {
             case BEFORE_EXECUTE:
@@ -103,7 +103,7 @@ public final class ExecuteEventListener {
     }
     
     private void handle(final AbstractSQLExecutionEvent event, final String operation) {
-        Tracer tracer = TracerContainer.init();
+        Tracer tracer = ShardingJDBCTracer.get();
         switch (event.getEventExecutionType()) {
             case BEFORE_EXECUTE:
                 if (ExecutorDataMap.getDataMap().containsKey(SNAPSHOT_DATA_KEY) && !isCurrentMainThread()) {

@@ -62,7 +62,7 @@ public class ExecuteEventListenerTest {
     @Before
     public void before() throws NoSuchFieldException, IllegalAccessException {
         tracer.reset();
-        TracerContainerTest.clearGlobalTracer();
+        ShardingJDBCTracerTest.clearGlobalTracer();
         GlobalTracer.register(tracer);
     }
     

@@ -40,7 +40,7 @@ import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(OptsConfigParser.class)
-public class TracerContainerTest {
+public class ShardingJDBCTracerTest {
     
     @Before
     public void setUp() throws Exception {
@@ -51,15 +51,15 @@ public class TracerContainerTest {
     @Test
     public void assertTracer() {
         when(System.getProperty("sjdbc.opentracing.tracer.class")).thenReturn("io.shardingjdbc.opentracing.fixture.FooTracer");
-        assertThat((GlobalTracer) TracerContainer.init(), Is.isA(GlobalTracer.class));
+        assertThat((GlobalTracer) ShardingJDBCTracer.get(), Is.isA(GlobalTracer.class));
         assertTrue(GlobalTracer.isRegistered());
-        assertThat(TracerContainer.init(), Is.is(TracerContainer.init()));
+        assertThat(ShardingJDBCTracer.get(), Is.is(ShardingJDBCTracer.get()));
     }
     
     @Test(expected = ShardingJdbcException.class)
     public void assertTracerClassError() {
         when(System.getProperty("sjdbc.opentracing.tracer.class")).thenReturn("com.foo.FooTracer");
-        TracerContainer.init();
+        ShardingJDBCTracer.get();
         
     }
     
