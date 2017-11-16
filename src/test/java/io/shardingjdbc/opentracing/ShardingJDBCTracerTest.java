@@ -18,9 +18,11 @@
 package io.shardingjdbc.opentracing;
 
 import io.opentracing.NoopTracerFactory;
+import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
 import io.shardingjdbc.core.exception.ShardingJdbcException;
 import io.shardingjdbc.opentracing.config.OptsConfigParser;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +32,10 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.lang.reflect.Field;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
@@ -43,6 +47,16 @@ public class ShardingJDBCTracerTest {
     public void setUp() throws Exception {
         mockStatic(System.class);
         clearGlobalTracer();
+    }
+    
+    @Test
+    public void assertDuplicatedLoading() {
+        ShardingJDBCTracer.init(mock(Tracer.class));
+        Tracer t1 = ShardingJDBCTracer.get();
+        ShardingJDBCTracer.init();
+        assertEquals(t1, ShardingJDBCTracer.get());
+        ShardingJDBCTracer.init(mock(Tracer.class));
+        assertEquals(t1, ShardingJDBCTracer.get());
     }
     
     @Test
@@ -60,7 +74,7 @@ public class ShardingJDBCTracerTest {
         
     }
     
-    static void clearGlobalTracer() throws NoSuchFieldException, IllegalAccessException {
+    private static void clearGlobalTracer() throws NoSuchFieldException, IllegalAccessException {
         Field tracerField = GlobalTracer.class.getDeclaredField("tracer");
         tracerField.setAccessible(true);
         tracerField.set(GlobalTracer.class, NoopTracerFactory.create());

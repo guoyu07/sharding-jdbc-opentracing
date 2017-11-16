@@ -46,21 +46,19 @@ import static org.powermock.api.mockito.PowerMockito.when;
 
 public class ExecuteEventListenerTest {
     
-    private final MockTracer tracer = new MockTracer(new ThreadLocalActiveSpanSource(),
+    private static final MockTracer TRACER = new MockTracer(new ThreadLocalActiveSpanSource(),
             MockTracer.Propagator.TEXT_MAP);
     
     private final ExecutorEngine executorEngine = new ExecutorEngine(5);
     
     @BeforeClass
     public static void init() {
-        EventBusInstance.getInstance().register(new ExecuteEventListener());
+        ShardingJDBCTracer.init(TRACER);
     }
     
     @Before
     public void before() throws NoSuchFieldException, IllegalAccessException {
-        tracer.reset();
-        ShardingJDBCTracerTest.clearGlobalTracer();
-        GlobalTracer.register(tracer);
+        TRACER.reset();
     }
     
     @Test
@@ -73,7 +71,7 @@ public class ExecuteEventListenerTest {
                 return 0;
             }
         });
-        assertThat(tracer.finishedSpans().size(), is(2));
+        assertThat(TRACER.finishedSpans().size(), is(2));
     }
     
     @Test
@@ -91,7 +89,7 @@ public class ExecuteEventListenerTest {
                 return 0;
             }
         });
-        assertThat(tracer.finishedSpans().size(), is(3));
+        assertThat(TRACER.finishedSpans().size(), is(3));
     }
     
     @Test(expected = ShardingJdbcException.class)

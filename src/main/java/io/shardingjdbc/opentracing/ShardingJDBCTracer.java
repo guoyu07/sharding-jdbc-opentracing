@@ -42,12 +42,24 @@ public final class ShardingJDBCTracer {
         }
         String tracerClassName = new ConfigLoader().getTracerClassName();
         try {
-            GlobalTracer.register((Tracer) Class.forName(tracerClassName).newInstance());
+            init((Tracer) Class.forName(tracerClassName).newInstance());
         } catch (final InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
             throw new ShardingJdbcException("Parse tracer class name", ex);
         }
+    }
+    
+    /**
+     * Initialize tracer from another one.
+     * 
+     * @param tracer that is delegated
+     */
+    public static void init(final Tracer tracer) {
+        if (GlobalTracer.isRegistered()) {
+            return;
+        }
+        GlobalTracer.register(tracer);
         EventBusInstance.getInstance().register(new ExecuteEventListener());
-    } 
+    }
     
     /**
      * Get the tracer from container.
