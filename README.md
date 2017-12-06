@@ -18,11 +18,14 @@ easy for developers using the Sharding-JDBC to incorporate the tracer that suppo
 </dependency>
 ```
 
-### Set jvm property
+### Using code to config plugin
 
-Set `-Dsjdbc.opentracing.tracer.class=OPENTRACING_TRACER_CLASS_NAME` to start the application. `OPENTRACING_TRACER_CLASS_NAME` MUST implement
-`io.opentracing.Tracer`
+Invoke `io.shardingjdbc.opentracing.ShardingJDBCTracer#init(Tracer)` before using Sharding-JDBC components.
 
-### Initialize plugin
+### Using jvm properties to config plugin
 
-Invoke `io.shardingjdbc.opentracing.ShardingJDBCTracer#init` method before using Sharding-JDBC components.
+You can set a tracer implement to the plugin by following instrument.
+
+ 1. set `-Dsjdbc.opentracing.tracer.class=OPENTRACING_TRACER_CLASS_NAME` to start the application. `OPENTRACING_TRACER_CLASS_NAME` MUST implement
+`io.opentracing.Tracer
+ 1. Invoke `io.shardingjdbc.opentracing.ShardingJDBCTracer#init()` method before using Sharding-JDBC components.
