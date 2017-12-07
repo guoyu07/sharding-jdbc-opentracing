@@ -19,7 +19,7 @@ Sharding-JDBC的开发人员很容易整合支持OpenTracing的Tracer。
 
 ### 设置Tracer
 
-有两种方法可以整合插件与`io.opentracing.Tracer`对象（例如[Zipkin]（https://zipkin.io），[Skywalking]（http://skywalking.org））。
+有两种方法可以整合插件与`io.opentracing.Tracer`对象（例如 [Zipkin](https://zipkin.io)，[Skywalking](http://skywalking.org)）。
 
 #### 1. 使用代码
 
