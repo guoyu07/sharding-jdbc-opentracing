@@ -44,7 +44,6 @@
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         
         <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
-        
     </properties>
     
     <dependencies>
@@ -89,7 +88,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
+    
     <build>
         <pluginManagement>
             <plugins>
@@ -282,7 +281,7 @@
             </plugin>
         </plugins>
     </build>
-
+    
     <reporting>
         <plugins>
             <plugin>
@@ -360,7 +359,7 @@
             </plugin>
         </plugins>
     </reporting>
-
+    
     <repositories>
         <repository>
             <id>alfresco-maven-repo</id>
@@ -387,7 +386,7 @@
             </releases>
         </repository>
     </repositories>
-
+    
     <url>http://shardingjdbc.io</url>
     <description>RDB Sharding</description>
     <licenses>
@@ -397,20 +396,20 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
+    
     <scm>
-        <connection>scm:https://github.com/shardingjdbc/sharding-jdbc</connection>
-        <developerConnection>scm:https://github.com/shardingjdbc/sharding-jdbc</developerConnection>
-        <url>https://github.com/shardingjdbc/sharding-jdbc</url>
+        <connection>scm:https://github.com/shardingjdbc/sharding-jdbc-opentracing</connection>
+        <developerConnection>scm:https://github.com/shardingjdbc/sharding-jdbc-opentracing</developerConnection>
+        <url>https://github.com/shardingjdbc/sharding-jdbc-opentracing</url>
     </scm>
-
+    
     <mailingLists>
         <mailingList>
             <name>Zhangliang</name>
             <post>zhangliang@dangdang.com</post>
         </mailingList>
     </mailingLists>
-
+    
     <developers>
         <developer>
             <id>zhangliang</id>
@@ -430,5 +429,4 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
-
 </project>
