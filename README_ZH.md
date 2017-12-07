@@ -2,7 +2,7 @@
 
 ## 介绍
 
-该插件会将[OpenTracing]（http://opentracing.io/）组件添加到Sharding-JDBC中。这个插件使
+该插件会将[OpenTracing](http://opentracing.io/)组件添加到Sharding-JDBC中。这个插件使
 Sharding-JDBC的开发人员很容易整合支持OpenTracing的Tracer。
 
 ## 使用方法
