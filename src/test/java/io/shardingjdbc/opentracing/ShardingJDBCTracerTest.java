@@ -61,7 +61,7 @@ public class ShardingJDBCTracerTest {
     
     @Test
     public void assertTracer() {
-        when(System.getProperty("sjdbc.opentracing.tracer.class")).thenReturn("io.shardingjdbc.opentracing.fixture.FooTracer");
+        when(System.getProperty("shardingjdbc.opentracing.tracer.class")).thenReturn("io.shardingjdbc.opentracing.fixture.FooTracer");
         assertThat((GlobalTracer) ShardingJDBCTracer.get(), Is.isA(GlobalTracer.class));
         assertTrue(GlobalTracer.isRegistered());
         assertThat(ShardingJDBCTracer.get(), Is.is(ShardingJDBCTracer.get()));
@@ -69,7 +69,7 @@ public class ShardingJDBCTracerTest {
     
     @Test(expected = ShardingJdbcException.class)
     public void assertTracerClassError() {
-        when(System.getProperty("sjdbc.opentracing.tracer.class")).thenReturn("com.foo.FooTracer");
+        when(System.getProperty("shardingjdbc.opentracing.tracer.class")).thenReturn("com.foo.FooTracer");
         ShardingJDBCTracer.get();
         
     }

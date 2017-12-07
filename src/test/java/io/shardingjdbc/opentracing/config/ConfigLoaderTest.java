@@ -39,7 +39,7 @@ public class ConfigLoaderTest {
     
     @Test
     public void assertLoadConfigFromProperty() {
-        when(System.getProperty("sjdbc.opentracing.tracer.class")).thenReturn("com.foo.fooClass");
+        when(System.getProperty("shardingjdbc.opentracing.tracer.class")).thenReturn("com.foo.fooClass");
         assertThat(new ConfigLoader().getTracerClassName(), is("com.foo.fooClass"));
     }
     

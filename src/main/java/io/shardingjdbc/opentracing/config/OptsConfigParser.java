@@ -26,7 +26,7 @@ import com.google.common.base.Optional;
  */
 public class OptsConfigParser implements ConfigParser {
     
-    private static final String PREFIX = "sjdbc.opentracing";
+    private static final String PREFIX = "shardingjdbc.opentracing";
     
     @Override
     public Optional<String> parse(final String configItem) {
