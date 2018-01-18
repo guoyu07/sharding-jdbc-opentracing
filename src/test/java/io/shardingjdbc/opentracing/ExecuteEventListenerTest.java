@@ -18,16 +18,13 @@
 package io.shardingjdbc.opentracing;
 
 import io.opentracing.mock.MockTracer;
-import io.opentracing.util.GlobalTracer;
 import io.opentracing.util.ThreadLocalActiveSpanSource;
 import io.shardingjdbc.core.constant.SQLType;
-import io.shardingjdbc.core.exception.ShardingJdbcException;
 import io.shardingjdbc.core.executor.BaseStatementUnit;
 import io.shardingjdbc.core.executor.ExecuteCallback;
 import io.shardingjdbc.core.executor.ExecutorEngine;
 import io.shardingjdbc.core.executor.type.statement.StatementUnit;
 import io.shardingjdbc.core.routing.SQLExecutionUnit;
-import io.shardingjdbc.core.util.EventBusInstance;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -92,7 +89,7 @@ public class ExecuteEventListenerTest {
         assertThat(TRACER.finishedSpans().size(), is(3));
     }
     
-    @Test(expected = ShardingJdbcException.class)
+    @Test(expected = SQLException.class)
     public void assertSQLException() throws Exception {
         Statement statement = mock(Statement.class);
         when(statement.getConnection()).thenReturn(mock(Connection.class));

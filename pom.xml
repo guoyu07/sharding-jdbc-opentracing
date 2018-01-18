@@ -6,7 +6,7 @@
     
     <groupId>io.shardingjdbc</groupId>
     <artifactId>sharding-jdbc-opentracing</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <name>${project.artifactId}</name>
     
     <properties>
@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.locale>zh_CN</project.build.locale>
         
-        <shardingjdbc.version>2.0.1</shardingjdbc.version>
+        <shardingjdbc.version>2.0.2</shardingjdbc.version>
         <opentracing.version>0.30.0</opentracing.version>
         <lombok.version>1.16.14</lombok.version>
         <junit.version>4.11</junit.version>
